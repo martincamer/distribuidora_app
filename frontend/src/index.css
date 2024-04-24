@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Lexend Deca", sans-serif;
+}
+
+.content-container {
+  height: calc(100vh - theme("spacing.20"));
+}
+
+.imagen_url {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.6)
+  ); /* Linear gradient with transparency */
+  background-image: url("./assets/intro.jpg"),
+    linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Fallback for browsers that don't support multiple background images */
+  background-blend-mode: lighten; /* Blend mode to lighten the background color */
+  background-size: cover;
+  background-position: center; /* Center the background image */
+  width: 100%;
+  z-index: 1;
+  height: 60vh;
+}
