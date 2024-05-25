@@ -1,6 +1,13 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
-import { loginRequest, registerRequest, verifyTokenRequest } from "../api/auth";
+import {
+  loginRequest,
+  registerRequest,
+  updateUser,
+  updateUserImagenUrl,
+  verifyTokenRequest,
+} from "../api/auth";
+import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
 const AuthContext = createContext();
@@ -19,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   // clear errors after 5 seconds
   useEffect(() => {
-    if (errors.length > 0) {
+    if (errors?.length > 0) {
       const timer = setTimeout(() => {
         setErrors([]);
       }, 5000);
@@ -46,8 +53,7 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       setIsAuthenticated(true);
     } catch (error) {
-      console.log(error);
-      // setErrors(error.response.data.message);
+      setErrors(error?.response?.data?.message);
     }
   };
 
@@ -65,11 +71,9 @@ export const AuthProvider = ({ children }) => {
         const res = await verifyTokenRequest(cookies.token);
         console.log(res);
         if (!res.data) return setIsAuthenticated(false);
-
         setIsAuthenticated(true);
         setUser(res.data);
         setLoading(false);
-        // return;
       } catch (error) {
         setIsAuthenticated(false);
         setLoading(false);
@@ -77,6 +81,69 @@ export const AuthProvider = ({ children }) => {
     };
     checkLogin();
   }, []);
+
+  const updateUserApi = async (id, datos) => {
+    try {
+      const res = await updateUser(id, datos);
+
+      const usuarioActualizado = {
+        ...user,
+        ...res.data.user, // Reemplazar con los campos actualizados
+      };
+
+      // Actualizar el estado con el nuevo objeto
+      setUser(usuarioActualizado);
+
+      toast.success("Datos editados correctamente", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        style: {
+          padding: "10px 15px",
+          borderRadius: "15px",
+        },
+        // transition: "Bounce",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updateUserImagen = async (id, datos) => {
+    try {
+      const res = await updateUserImagenUrl(id, datos);
+
+      const usuarioActualizado = {
+        ...user,
+        ...res.data.user, // Reemplazar con los campos actualizados
+      };
+
+      // Actualizar el estado con el nuevo objeto
+      setUser(usuarioActualizado);
+
+      toast.success("Datos editados correctamente", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        style: {
+          padding: "10px 15px",
+          borderRadius: "15px",
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const logout = () => {
     Cookies.remove("token");
@@ -94,6 +161,8 @@ export const AuthProvider = ({ children }) => {
         isAuthenticated,
         errors,
         loading,
+        updateUserApi,
+        updateUserImagen,
       }}
     >
       {children}

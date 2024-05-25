@@ -1,11 +1,62 @@
-@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: "Lexend Deca", sans-serif;
+  /* font-family: "Lexend Deca", sans-serif; */
+  /* font-family: "Nunito Sans", sans-serif; */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  /* background-color: #ecf0f1; */
+  background-color: #ecf0f1;
+  &::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra de desplazamiento */
+    border-radius: 2px; /* Bordes redondeados */
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color del riel */
+    border-radius: 10px; /* Bordes redondeados para el riel */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(
+      190,
+      190,
+      190,
+      0.6
+    ); /* Color de la barra de desplazamiento */
+    border-radius: 2px; /* Bordes redondeados para el pulgar */
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(211, 237, 255); /* Color al pasar el mouse por encima */
+  }
+  /* background-color: rgb(255, 255, 255); */
+}
+
+.scroll-bar {
+  &::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+    height: 8px;
+    border-radius: 2px; /* Bordes redondeados */
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color del riel */
+    border-radius: 10px; /* Bordes redondeados para el riel */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(
+      190,
+      190,
+      190,
+      0.6
+    ); /* Color de la barra de desplazamiento */
+    border-radius: 2px; /* Bordes redondeados para el pulgar */
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(211, 237, 255); /* Color al pasar el mouse por encima */
+  }
 }
 
 .content-container {
@@ -26,4 +77,26 @@ body {
   width: 100%;
   z-index: 1;
   height: 60vh;
+}
+
+.fade-slide-enter {
+  opacity: 0;
+  transform: translateY(-10%);
+}
+
+.fade-slide-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 300ms;
+}
+
+.fade-slide-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-slide-exit-active {
+  opacity: 0;
+  transform: translateY(-10%);
+  transition: all 300ms;
 }

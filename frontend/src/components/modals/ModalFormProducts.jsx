@@ -31,7 +31,6 @@ export default function ModalFormProducts({ isOpen, closeModal, idObtenida }) {
         });
 
         reset();
-        closeModal();
       } else {
         createProducto({
           ...data,
@@ -39,8 +38,9 @@ export default function ModalFormProducts({ isOpen, closeModal, idObtenida }) {
         });
 
         reset();
-        closeModal();
       }
+
+      closeModal();
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +56,6 @@ export default function ModalFormProducts({ isOpen, closeModal, idObtenida }) {
       if (idObtenida) {
         const producto = await getProducto(idObtenida);
 
-        console.log(producto);
         setValue("codigo", producto.codigo);
         setValue("detalle", producto.detalle);
         setValue("color", producto.color);
@@ -205,16 +204,6 @@ export default function ModalFormProducts({ isOpen, closeModal, idObtenida }) {
                     </div>
                   </form>
                 </div>
-
-                {/* <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={() => handleCloseModal()}
-                  >
-                    CERRAR VENTANA
-                  </button>
-                </div> */}
               </Dialog.Panel>
             </Transition.Child>
           </div>

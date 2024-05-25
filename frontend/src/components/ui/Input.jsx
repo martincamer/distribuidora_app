@@ -5,7 +5,7 @@ export const Input = forwardRef((props, ref, styles) => (
     {...props}
     ref={ref}
     className={
-      "uppercase text-sm w-full bg-white border-slate-200 border-[1px] text-slate-900 px-4 py-3 rounded-xl shadow"
+      "text-sm w-full bg-gray-200/90 placeholder:text-gray-500 font-semibold text-gray-800 px-4 py-3 rounded-xl focus:outline-sky-500 transition-all"
     }
   />
 ));
